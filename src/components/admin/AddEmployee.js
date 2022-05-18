@@ -22,20 +22,24 @@ const AddEmployee = ({ getToken }) => {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    axios
-      .post(
-        "https://employee-management-system-backend.vercel.app/admin/add",
-        input,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": getToken,
-          },
-        }
-      )
-      .then((response) => {
-        navigate("/admin/dashboard");
-      });
+    if (input.password.length >= 8) {
+      axios
+        .post(
+          "https://employee-management-system-backend.vercel.app/admin/add",
+          input,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token": getToken,
+            },
+          }
+        )
+        .then((response) => {
+          navigate("/admin/dashboard");
+        });
+    } else {
+      alert("Password length must be 8 characters");
+    }
   };
   return (
     <>

@@ -16,12 +16,16 @@ const Signup = () => {
   };
   const submitHandler = (event) => {
     event.preventDefault();
-    axios
-      .post(
-        "https://employee-management-system-backend.vercel.app/employee/signup",
-        input
-      )
-      .then((response) => setAlert(response.data));
+    if (input.password.length >= 8) {
+      axios
+        .post(
+          "https://employee-management-system-backend.vercel.app/employee/signup",
+          input
+        )
+        .then((response) => setAlert(response.data));
+    } else {
+      setAlert("Password length must be 8 characters");
+    }
   };
   return (
     <>
